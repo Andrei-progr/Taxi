@@ -1,29 +1,35 @@
 package com.company;
-import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.ArrayList;
 
-public class TaxiServices {
-    int waitTime;
-    int cost;
-    int roadTime;
-    String pay;
+public class Main {
 
-    public void getUser(String userData) throws IncorrectData{
-        String[] userArray = userData.split(",");
-        try {
-            waitTime = Integer.parseInt(userArray[0]);
-            cost = Integer.parseInt(userArray[1]);
-            roadTime = Integer.parseInt(userArray[2]);
-            pay = userArray[3];
-        } catch (Exception e){
-            throw new IncorrectData("Вы ввели некоректные данные пользователя");
+    public static void main(String[] args){
+        ArrayList<String> services = new ArrayList<String>();
+
+        Scanner scanner = new Scanner(System.in);
+        String line;
+        while (!(line = scanner.nextLine()).isEmpty()) {
+            System.out.println("Параметры сервиса: " + line);
+            services.add(line);
         }
-    }
+        System.out.println("Введите параметр пользователя");
+        String UserInput = scanner.nextLine();
+        System.out.println("Параметры пользователя: " + UserInput);
 
-    public void getServices(ArrayList<String> services) throws IncorrectData {
-        for
-    }
+        User user = null;
+        try {
+            user = new User(UserInput);
+        } catch (IncorrectData e) {
+            e.printStackTrace();
+        }
 
-    public String[] response(){
+        TaxiServices taxi = new TaxiServices(services);
+        ArrayList<String> res = taxi.result(user);
+        System.out.println(res);
 
     }
+}
+
